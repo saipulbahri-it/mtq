@@ -134,15 +134,60 @@
       /* Section Animations */
       .fade-in {
         opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease forwards;
+        transform: translateY(40px) scale(0.97) rotateZ(-1deg);
+        filter: blur(4px);
+        animation: fadeInModern 1s cubic-bezier(.22,1,.36,1.1) forwards;
+        will-change: opacity, transform, filter;
+      }
+      @keyframes fadeInModern {
+        0% {
+          opacity: 0;
+          transform: translateY(40px) scale(0.97) rotateZ(-1deg);
+          filter: blur(4px);
+        }
+        50% {
+          opacity: 0.6;
+          filter: blur(1.5px);
+          transform: translateY(-4px) scale(1.01) rotateZ(0.5deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotateZ(0deg);
+          filter: blur(0px);
+        }
       }
 
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      /* Animasi gambar zoom-in */
+      .img-zoom-in {
+        opacity: 0;
+        transform: scale(0.93) rotateZ(-2deg);
+        filter: blur(2px);
+        transition: opacity 0.8s cubic-bezier(.22,1,.36,1.1), 
+                    transform 0.8s cubic-bezier(.22,1,.36,1.1),
+                    filter 0.8s;
+      }
+      .img-zoom-in.visible {
+        opacity: 1;
+        transform: scale(1) rotateZ(0deg);
+        filter: blur(0);
+      }
+
+      /* Tambahkan/ubah bagian CSS berikut untuk animasi section saat scroll */
+      /* Animasi section masuk dari bawah dengan fade dan sedikit zoom */
+      .section-animate {
+        opacity: 0;
+        transform: translateY(60px) scale(0.97);
+        filter: blur(6px);
+        transition:
+          opacity 0.9s cubic-bezier(.22,1,.36,1.1),
+          transform 0.9s cubic-bezier(.22,1,.36,1.1),
+          filter 0.9s;
+        will-change: opacity, transform, filter;
+      }
+      .section-animate.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
       }
 
       /* Responsive */
@@ -267,7 +312,7 @@
     <!-- Hero Section -->
     <section
       id="beranda"
-      class="min-h-screen hero-pattern flex items-center justify-center relative overflow-hidden pt-28 md:pt-24"
+      class="min-h-screen hero-pattern flex items-center justify-center relative overflow-hidden pt-28 md:pt-24 section-animate"
     >
       <!-- Decorative Elements -->
       <div class="absolute inset-0 opacity-20">
@@ -304,16 +349,20 @@
 
             <div class="glass-card p-6 mb-8">
               <p
-                class="text-lg md:text-xl italic text-slate-600 leading-relaxed"
+                class="text-lg md:text-xl italic leading-relaxed font-semibold"
+                style="background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
+                       -webkit-background-clip: text;
+                       -webkit-text-fill-color: transparent;
+                       background-clip: text;
+                       text-fill-color: transparent;"
               >
-                "Mari Tingkatkan SDM Qur'ani yang Unggul Menuju Aceh Maju Pidie
-                Jaya Meusyuhu"
+                "Mari Tingkatkan SDM Qur'ani yang Unggul Menuju Aceh Maju Pidie Jaya Meusyuhu"
               </p>
             </div>
 
             <!-- Countdown Timer -->
             <div class="mb-8">
-              <h3 class="text-xl font-semibold mb-6 text-blue-600">
+              <h3 class="text-xl font-semibold mb-6 text-blue-600" style="font-family: 'Playfair Display', serif;">
                 Hitung Mundur Menuju MTQ
               </h3>
               <div class="countdown-container justify-center lg:justify-start">
@@ -364,7 +413,7 @@
                   <img
                     src="images/bupati-dan-wakil-2025.png"
                     alt="Bupati dan Wakil Bupati Pidie Jaya 2025"
-                    class="w-full h-80 object-cover transition-transform duration-500 hover:scale-110"
+                    class="w-full h-80 object-cover transition-transform duration-500 hover:scale-110 img-zoom-in"
                     loading="lazy"
                   />
                   <!-- Corner accent -->
@@ -417,7 +466,7 @@
     </section>
 
     <!-- Tentang Section -->
-    <section id="tentang" class="py-20 relative">
+    <section id="tentang" class="py-20 relative section-animate">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
           <span
@@ -521,7 +570,7 @@
     <!-- Cabang Lomba Section -->
     <section
       id="cabang"
-      class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50"
+      class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50 section-animate"
     >
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
@@ -710,7 +759,7 @@
     </section>
 
     <!-- Lokasi Section -->
-    <section id="lokasi" class="py-20 relative">
+    <section id="lokasi" class="py-20 relative section-animate">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
           <span
@@ -727,6 +776,7 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Info Venue -->
           <div class="fade-in">
             <h3 class="text-3xl font-bold text-slate-800 mb-6">
               Kabupaten Pidie Jaya
@@ -736,11 +786,7 @@
                 <div
                   class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg
-                    class="w-6 h-6 text-blue-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
+                  <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fill-rule="evenodd"
                       d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -749,9 +795,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Venue Utama
-                  </h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">Venue Utama</h4>
                   <p class="text-slate-600">
                     Stadion Cot Trieng & Gedung Serbaguna
                   </p>
@@ -761,20 +805,14 @@
                 <div
                   class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg
-                    class="w-6 h-6 text-green-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
+                  <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"
                     />
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Lokasi Perlombaan
-                  </h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">Lokasi Perlombaan</h4>
                   <p class="text-slate-600">
                     Berbagai venue strategis di seluruh kabupaten
                   </p>
@@ -784,11 +822,7 @@
                 <div
                   class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg
-                    class="w-6 h-6 text-amber-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
+                  <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fill-rule="evenodd"
                       d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -797,9 +831,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Fasilitas
-                  </h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">Fasilitas</h4>
                   <p class="text-slate-600">
                     Akomodasi, transportasi, dan fasilitas pendukung
                   </p>
@@ -807,7 +839,8 @@
               </div>
             </div>
           </div>
-          <div class="glass-card p-6 fade-in">
+          <!-- Google Maps -->
+          <div class="glass-card p-6 fade-in mt-8">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.4252051038724!2d96.206!3d5.148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMDgnNTIuOCJOIDk2wrAxMicyLjgiRQ!5e0!3m2!1sen!2sid!4v1620000000000"
               width="100%"
@@ -827,7 +860,7 @@
     <!-- Jadwal Section -->
     <section
       id="jadwal"
-      class="py-20 bg-gradient-to-br from-purple-50 to-pink-50"
+      class="py-20 bg-gradient-to-br from-purple-50 to-pink-50 section-animate"
     >
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
@@ -949,7 +982,7 @@
     </section>
 
     <!-- Berita Section -->
-    <section id="berita" class="py-20 relative">
+    <section id="berita" class="py-20 relative section-animate">
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
           <span
@@ -1126,7 +1159,7 @@
     <!-- Fitur Interaktif Section -->
     <section
       id="fitur"
-      class="py-20 bg-gradient-to-br from-indigo-50 to-purple-50"
+      class="py-20 bg-gradient-to-br from-indigo-50 to-purple-50 section-animate"
     >
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16 fade-in">
@@ -1368,15 +1401,48 @@
       // Fade in animation observer
       const fadeElements = document.querySelectorAll('.fade-in');
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, i) => {
           if (entry.isIntersecting) {
-            entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
-            entry.target.classList.add('fade-in');
+            entry.target.style.animationDelay = `${i * 0.08 + Math.random() * 0.08}s`;
+            entry.target.classList.add('fade-in-activated');
+            entry.target.classList.remove('fade-in');
+            observer.unobserve(entry.target);
           }
         });
-      });
+      }, { threshold: 0.15 });
 
       fadeElements.forEach(el => observer.observe(el));
+
+      // Gambar animasi zoom-in
+      const imgZooms = document.querySelectorAll('.img-zoom-in');
+      const imgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            imgObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      imgZooms.forEach(img => imgObserver.observe(img));
+
+      // Section scroll animation
+      document.querySelectorAll('.section-animate').forEach(section => {
+        section.classList.remove('visible');
+      });
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll('.section-animate').forEach(section => {
+        sectionObserver.observe(section);
+      });
     </script>
   </body>
 </html>
