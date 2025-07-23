@@ -236,6 +236,29 @@
           height: 2.5rem;
         }
       }
+
+      /* Tambahkan CSS untuk animasi live-dot */
+      .live-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #f59e42;
+        border-radius: 50%;
+        margin-right: 2px;
+        box-shadow: 0 0 0 0 rgba(245,158,66, 0.7);
+        animation: live-pulse 1.2s infinite cubic-bezier(.4,0,.6,1);
+      }
+      @keyframes live-pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(245,158,66, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(245,158,66, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(245,158,66, 0);
+        }
+      }
     </style>
   </head>
 
@@ -268,6 +291,15 @@
             <a href="#jadwal" class="nav-link">Jadwal</a>
             <a href="#berita" class="nav-link">Berita</a>
             <a href="#fitur" class="nav-link">Fitur</a>
+            <a href="#live" class="nav-link text-orange-600 font-bold flex items-center gap-1">
+              <span class="relative flex items-center">
+                <span class="live-dot animate-pulse"></span>
+                <svg class="w-4 h-4 ml-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <circle cx="10" cy="10" r="6" fill="currentColor"/>
+                </svg>
+              </span>
+              Live
+            </a>
           </nav>
 
           <!-- Mobile Menu Button -->
@@ -304,6 +336,15 @@
             <a href="#jadwal" class="nav-link">Jadwal</a>
             <a href="#berita" class="nav-link">Berita</a>
             <a href="#fitur" class="nav-link">Fitur</a>
+            <a href="#live" class="nav-link text-orange-600 font-bold flex items-center gap-1">
+              <span class="relative flex items-center">
+                <span class="live-dot animate-pulse"></span>
+                <svg class="w-4 h-4 ml-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <circle cx="10" cy="10" r="6" fill="currentColor"/>
+                </svg>
+              </span>
+              Live
+            </a>
           </div>
         </nav>
       </div>
@@ -1308,6 +1349,69 @@
       </div>
     </section>
 
+    <!-- Live Section -->
+    <section id="live" class="py-20 bg-gradient-to-br from-yellow-50 to-orange-50 section-animate relative">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10 fade-in">
+          <span class="inline-block bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            Live Streaming
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800">
+            Saksikan MTQ Aceh XXXVII Secara Langsung
+          </h2>
+          <p class="text-slate-600 mb-6">
+            Ikuti siaran langsung pelaksanaan MTQ Aceh XXXVII di Pidie Jaya melalui kanal YouTube berikut.
+          </p>
+        </div>
+        <div class="w-full aspect-w-16 aspect-h-9 rounded-xl overflow-hidden fade-in relative">
+          <iframe
+            src="https://www.youtube.com/embed/2Gub8-cSH9c"
+            title="Live MTQ Aceh XXXVII"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            class="w-full h-full min-h-[320px] md:min-h-[480px] rounded-xl"
+          ></iframe>
+          <!-- Tombol Fullscreen Overlay -->
+          <button
+            id="open-video-overlay"
+            class="absolute bottom-4 right-4 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition"
+            style="z-index:2"
+            aria-label="Tampilkan Layar Penuh"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-16h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"/>
+            </svg>
+            Fullscreen
+          </button>
+        </div>
+      </div>
+
+      <!-- Overlay Video Fullscreen -->
+      <div id="video-overlay" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999] hidden">
+        <button
+          id="close-video-overlay"
+          class="absolute top-6 right-8 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+          aria-label="Tutup Video"
+          style="z-index:10001"
+        >
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="w-full max-w-6xl aspect-w-16 aspect-h-9">
+          <iframe
+            src="https://www.youtube.com/embed/2Gub8-cSH9c?autoplay=1"
+            title="Live MTQ Aceh XXXVII"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            class="w-full h-full rounded-lg shadow-2xl"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-slate-100 border-t border-slate-200 py-8">
       <div class="max-w-6xl mx-auto px-4 text-center">
@@ -1443,6 +1547,34 @@
       document.querySelectorAll('.section-animate').forEach(section => {
         sectionObserver.observe(section);
       });
+
+      // Overlay video logic
+      const openOverlayBtn = document.getElementById('open-video-overlay');
+      const closeOverlayBtn = document.getElementById('close-video-overlay');
+      const videoOverlay = document.getElementById('video-overlay');
+
+      if (openOverlayBtn && closeOverlayBtn && videoOverlay) {
+        openOverlayBtn.addEventListener('click', () => {
+          videoOverlay.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
+        closeOverlayBtn.addEventListener('click', () => {
+          videoOverlay.classList.add('hidden');
+          document.body.style.overflow = '';
+          // Stop video playback by resetting src
+          const iframe = videoOverlay.querySelector('iframe');
+          iframe.src = iframe.src;
+        });
+        // Optional: close overlay on ESC key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !videoOverlay.classList.contains('hidden')) {
+            videoOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+            const iframe = videoOverlay.querySelector('iframe');
+            iframe.src = iframe.src;
+          }
+        });
+      }
     </script>
   </body>
 </html>
