@@ -11,258 +11,163 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      /* Modern Bright Theme */
-      body {
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        color: #1e293b;
-      }
-
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Playfair Display', serif;
-      }
-
-      /* Hero Pattern */
-      .hero-pattern {
-        background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-        background-image:
-          radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 75% 75%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
-      }
-
-      /* Card Styles */
-      .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        border-radius: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      }
-
-      .glass-card:hover {
-        background: rgba(255, 255, 255, 0.95);
-        border-color: rgba(59, 130, 246, 0.3);
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Countdown Styles */
-      .countdown-container {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        margin: 24px 0;
-        flex-wrap: wrap;
-      }
-
-      .countdown-item {
-        background: linear-gradient(145deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.05));
-        border: 2px solid rgba(59, 130, 246, 0.2);
-        border-radius: 12px;
-        padding: 16px 12px;
-        text-align: center;
-        min-width: 80px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-      }
-
-      .countdown-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-        transition: left 0.6s ease;
-      }
-
-      .countdown-item:hover::before {
-        left: 100%;
-      }
-
-      .countdown-number {
-        font-family: 'Playfair Display', serif;
-        font-size: 2rem;
-        font-weight: 700;
-        color: #1d4ed8;
-        text-shadow: 0 2px 8px rgba(29, 78, 216, 0.2);
-      }
-
-      .countdown-label {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #64748b;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-top: 4px;
-      }
-
-      /* Navigation Styles */
-      .nav-link {
-        position: relative;
-        padding: 8px 16px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        color: #475569;
-      }
-
-      .nav-link:hover {
-        background: rgba(59, 130, 246, 0.1);
-        color: #1d4ed8;
-      }
-
-      .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background: #1d4ed8;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-      }
-
-      .nav-link:hover::after {
-        width: 80%;
-      }
-
-      /* Section Animations */
-      .fade-in {
-        opacity: 0;
-        transform: translateY(40px) scale(0.97) rotateZ(-1deg);
-        filter: blur(4px);
-        animation: fadeInModern 1s cubic-bezier(.22,1,.36,1.1) forwards;
-        will-change: opacity, transform, filter;
-      }
-      @keyframes fadeInModern {
-        0% {
-          opacity: 0;
-          transform: translateY(40px) scale(0.97) rotateZ(-1deg);
-          filter: blur(4px);
-        }
-        50% {
-          opacity: 0.6;
-          filter: blur(1.5px);
-          transform: translateY(-4px) scale(1.01) rotateZ(0.5deg);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1) rotateZ(0deg);
-          filter: blur(0px);
-        }
-      }
-
-      /* Animasi gambar zoom-in */
-      .img-zoom-in {
-        opacity: 0;
-        transform: scale(0.93) rotateZ(-2deg);
-        filter: blur(2px);
-        transition: opacity 0.8s cubic-bezier(.22,1,.36,1.1), 
-                    transform 0.8s cubic-bezier(.22,1,.36,1.1),
-                    filter 0.8s;
-      }
-      .img-zoom-in.visible {
-        opacity: 1;
-        transform: scale(1) rotateZ(0deg);
-        filter: blur(0);
-      }
-
-      /* Tambahkan/ubah bagian CSS berikut untuk animasi section saat scroll */
-      /* Animasi section masuk dari bawah dengan fade dan sedikit zoom */
-      .section-animate {
-        opacity: 0;
-        transform: translateY(60px) scale(0.97);
-        filter: blur(6px);
-        transition:
-          opacity 0.9s cubic-bezier(.22,1,.36,1.1),
-          transform 0.9s cubic-bezier(.22,1,.36,1.1),
-          filter 0.9s;
-        will-change: opacity, transform, filter;
-      }
-      .section-animate.visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .countdown-container {
-          justify-content: center;
-          gap: 12px;
-        }
-
-        .countdown-item {
-          min-width: 70px;
-          padding: 12px 8px;
-        }
-
-        .countdown-number {
-          font-size: 1.5rem;
-        }
-
-        .countdown-label {
-          font-size: 0.65rem;
-        }
-      }
-
-      /* Header Scroll Effect */
-      .header-scrolled {
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .header-scrolled .logo-img {
-        height: 3rem;
-      }
-
-      .header-scrolled .header-padding {
-        padding: 0.75rem 1rem;
-      }
-
-      @media (max-width: 768px) {
-        .logo-img {
-          height: 3.5rem;
-        }
-
-        .header-scrolled .logo-img {
-          height: 2.5rem;
-        }
-      }
-
-      /* Tambahkan CSS untuk animasi live-dot */
-      .live-dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #f59e42;
-        border-radius: 50%;
-        margin-right: 2px;
-        box-shadow: 0 0 0 0 rgba(245,158,66, 0.7);
-        animation: live-pulse 1.2s infinite cubic-bezier(.4,0,.6,1);
-      }
-      @keyframes live-pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(245,158,66, 0.7);
-        }
-        70% {
-          box-shadow: 0 0 0 8px rgba(245,158,66, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(245,158,66, 0);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
 
   <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-logo"></div>
+      <div class="loading-text">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400"
+          >
+            MTQ ACEH <br />
+            XXXVII
+          </span>
+        </h1>
+        <h2
+          class="loading-text text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-slate-700"
+        >
+          PIDIE JAYA 2025
+        </h2>
+      </div>
+
+      <div class="loading-progress">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+
+    <!-- Social Media Floating -->
+    <div class="social-float md:flex hidden">
+      <a
+        href="https://facebook.com/mtqaceh"
+        target="_blank"
+        class="social-facebook"
+        title="Facebook"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+          />
+        </svg>
+      </a>
+      <a
+        href="https://instagram.com/mtqaceh"
+        target="_blank"
+        class="social-instagram"
+        title="Instagram"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M12.017 0C8.396 0 7.989.013 7.041.048 6.094.082 5.458.204 4.908.388a7.418 7.418 0 0 0-2.676 1.744A7.418 7.418 0 0 0 .388 4.908C.204 5.458.082 6.094.048 7.041.013 7.989 0 8.396 0 12.017s.013 4.028.048 4.976c.034.947.156 1.583.34 2.133a7.418 7.418 0 0 0 1.744 2.676 7.418 7.418 0 0 0 2.676 1.744c.55.184 1.186.306 2.133.34.948.035 1.355.048 4.976.048s4.028-.013 4.976-.048c.947-.034 1.583-.156 2.133-.34a7.418 7.418 0 0 0 2.676-1.744 7.418 7.418 0 0 0 1.744-2.676c.184-.55.306-1.186.34-2.133.035-.948.048-1.355.048-4.976s-.013-4.028-.048-4.976c-.034-.947-.156-1.583-.34-2.133a7.418 7.418 0 0 0-1.744-2.676A7.418 7.418 0 0 0 19.092.388c-.55-.184-1.186-.306-2.133-.34C16.011.013 15.604 0 12.017 0zm0 2.163c3.556 0 3.976.015 5.38.048.906.033 1.576.142 2.126.3.535.207.918.457 1.32.858.401.402.651.785.858 1.32.158.55.267 1.22.3 2.126.033 1.404.048 1.824.048 5.38s-.015 3.976-.048 5.38c-.033.906-.142 1.576-.3 2.126-.207.535-.457.918-.858 1.32-.402.401-.785.651-1.32.858-.55.158-1.22.267-2.126.3-1.404.033-1.824.048-5.38.048s-3.976-.015-5.38-.048c-.906-.033-1.576-.142-2.126-.3-.535-.207-.918-.457-1.32-.858-.401-.402-.651-.785-.858-1.32-.158-.55-.267-1.22-.3-2.126-.033-1.404-.048-1.824-.048-5.38s.015-3.976.048-5.38c.033-.906.142-1.576.3-2.126.207-.535.457-.918.858-1.32.402-.401.785-.651 1.32-.858.55-.158 1.22-.267 2.126-.3 1.404-.033 1.824-.048 5.38-.048zm0 3.67a6.184 6.184 0 1 0 0 12.368 6.184 6.184 0 0 0 0-12.368zm0 10.205a4.021 4.021 0 1 1 0-8.042 4.021 4.021 0 0 1 0 8.042zm7.877-10.447a1.443 1.443 0 1 1-2.886 0 1.443 1.443 0 0 1 2.886 0z"
+          />
+        </svg>
+      </a>
+      <a
+        href="https://youtube.com/@mtqaceh"
+        target="_blank"
+        class="social-youtube"
+        title="YouTube"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+          />
+        </svg>
+      </a>
+      <a
+        href="https://wa.me/6281234567890"
+        target="_blank"
+        class="social-whatsapp"
+        title="WhatsApp"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="share-modal">
+      <div class="share-content">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-bold">Bagikan Website</h3>
+          <button id="close-share" class="text-gray-500 hover:text-gray-700">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <button
+            onclick="shareToFacebook()"
+            class="flex items-center gap-3 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              />
+            </svg>
+            Facebook
+          </button>
+          <button
+            onclick="shareToTwitter()"
+            class="flex items-center gap-3 p-3 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+              />
+            </svg>
+            Twitter
+          </button>
+          <button
+            onclick="shareToWhatsApp()"
+            class="flex items-center gap-3 p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"
+              />
+            </svg>
+            WhatsApp
+          </button>
+          <button
+            onclick="copyToClipboard()"
+            class="flex items-center gap-3 p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            Copy Link
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Header -->
     <header
       id="main-header"
@@ -291,11 +196,18 @@
             <a href="#jadwal" class="nav-link">Jadwal</a>
             <a href="#berita" class="nav-link">Berita</a>
             <a href="#fitur" class="nav-link">Fitur</a>
-            <a href="#live" class="nav-link text-orange-600 font-bold flex items-center gap-1">
+            <a
+              href="#live"
+              class="nav-link text-orange-600 font-bold flex items-center gap-1"
+            >
               <span class="relative flex items-center">
                 <span class="live-dot animate-pulse"></span>
-                <svg class="w-4 h-4 ml-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                  <circle cx="10" cy="10" r="6" fill="currentColor"/>
+                <svg
+                  class="w-4 h-4 ml-1 text-orange-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <circle cx="10" cy="10" r="6" fill="currentColor" />
                 </svg>
               </span>
               Live
@@ -336,11 +248,18 @@
             <a href="#jadwal" class="nav-link">Jadwal</a>
             <a href="#berita" class="nav-link">Berita</a>
             <a href="#fitur" class="nav-link">Fitur</a>
-            <a href="#live" class="nav-link text-orange-600 font-bold flex items-center gap-1">
+            <a
+              href="#live"
+              class="nav-link text-orange-600 font-bold flex items-center gap-1"
+            >
               <span class="relative flex items-center">
                 <span class="live-dot animate-pulse"></span>
-                <svg class="w-4 h-4 ml-1 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                  <circle cx="10" cy="10" r="6" fill="currentColor"/>
+                <svg
+                  class="w-4 h-4 ml-1 text-orange-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <circle cx="10" cy="10" r="6" fill="currentColor" />
                 </svg>
               </span>
               Live
@@ -397,13 +316,17 @@
                        background-clip: text;
                        text-fill-color: transparent;"
               >
-                "Mari Tingkatkan SDM Qur'ani yang Unggul Menuju Aceh Maju Pidie Jaya Meusyuhu"
+                "Mari Tingkatkan SDM Qur'ani yang Unggul Menuju Aceh Maju Pidie
+                Jaya Meusyuhu"
               </p>
             </div>
 
             <!-- Countdown Timer -->
             <div class="mb-8">
-              <h3 class="text-xl font-semibold mb-6 text-blue-600" style="font-family: 'Playfair Display', serif;">
+              <h3
+                class="text-xl font-semibold mb-6 text-blue-600"
+                style="font-family: 'Playfair Display', serif;"
+              >
                 Hitung Mundur Menuju MTQ
               </h3>
               <div class="countdown-container justify-center lg:justify-start">
@@ -827,7 +750,11 @@
                 <div
                   class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    class="w-6 h-6 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fill-rule="evenodd"
                       d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -836,7 +763,9 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">Venue Utama</h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">
+                    Venue Utama
+                  </h4>
                   <p class="text-slate-600">
                     Stadion Cot Trieng & Gedung Serbaguna
                   </p>
@@ -846,14 +775,20 @@
                 <div
                   class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    class="w-6 h-6 text-green-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"
                     />
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">Lokasi Perlombaan</h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">
+                    Lokasi Perlombaan
+                  </h4>
                   <p class="text-slate-600">
                     Berbagai venue strategis di seluruh kabupaten
                   </p>
@@ -863,7 +798,11 @@
                 <div
                   class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
                 >
-                  <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    class="w-6 h-6 text-amber-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fill-rule="evenodd"
                       d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -872,7 +811,9 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">Fasilitas</h4>
+                  <h4 class="font-semibold text-slate-800 text-lg">
+                    Fasilitas
+                  </h4>
                   <p class="text-slate-600">
                     Akomodasi, transportasi, dan fasilitas pendukung
                   </p>
@@ -1350,20 +1291,28 @@
     </section>
 
     <!-- Live Section -->
-    <section id="live" class="py-20 bg-gradient-to-br from-yellow-50 to-orange-50 section-animate relative">
+    <section
+      id="live"
+      class="py-20 bg-gradient-to-br from-yellow-50 to-orange-50 section-animate relative"
+    >
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-10 fade-in">
-          <span class="inline-block bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <span
+            class="inline-block bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+          >
             Live Streaming
           </span>
           <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-800">
             Saksikan MTQ Aceh XXXVII Secara Langsung
           </h2>
           <p class="text-slate-600 mb-6">
-            Ikuti siaran langsung pelaksanaan MTQ Aceh XXXVII di Pidie Jaya melalui kanal YouTube berikut.
+            Ikuti siaran langsung pelaksanaan MTQ Aceh XXXVII di Pidie Jaya
+            melalui kanal YouTube berikut.
           </p>
         </div>
-        <div class="w-full aspect-w-16 aspect-h-9 rounded-xl overflow-hidden fade-in relative">
+        <div
+          class="w-full aspect-w-16 aspect-h-9 rounded-xl overflow-hidden fade-in relative"
+        >
           <iframe
             src="https://www.youtube.com/embed/2Gub8-cSH9c"
             title="Live MTQ Aceh XXXVII"
@@ -1379,8 +1328,18 @@
             style="z-index:2"
             aria-label="Tampilkan Layar Penuh"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-16h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"/>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-16h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"
+              />
             </svg>
             Fullscreen
           </button>
@@ -1388,15 +1347,28 @@
       </div>
 
       <!-- Overlay Video Fullscreen -->
-      <div id="video-overlay" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999] hidden">
+      <div
+        id="video-overlay"
+        class="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999] hidden"
+      >
         <button
           id="close-video-overlay"
           class="absolute top-6 right-8 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
           aria-label="Tutup Video"
           style="z-index:10001"
         >
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          <svg
+            class="w-7 h-7"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
         <div class="w-full max-w-6xl aspect-w-16 aspect-h-9">
@@ -1418,163 +1390,20 @@
         <p class="text-slate-600">
           &copy; 2025 MTQ XXXVII Provinsi Aceh - Kabupaten Pidie Jaya
         </p>
+        <p class="text-slate-500 text-sm mt-2">
+          Developed by <strong>saifcode</strong>
+        </p>
       </div>
     </footer>
 
+    <script src="./js/index.js"></script>
     <script>
-      // Countdown functionality
-      const daysEl = document.getElementById("days");
-      const hoursEl = document.getElementById("hours");
-      const minutesEl = document.getElementById("minutes");
-      const secondsEl = document.getElementById("seconds");
-      const targetDate = new Date("2025-10-18T00:00:00").getTime();
-
-      function padZero(num, digits = 2) {
-        return num.toString().padStart(digits, '0');
-      }
-
-      function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
-
-        if (diff > 0) {
-          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-          const minutes = Math.floor((diff / 1000 / 60) % 60);
-          const seconds = Math.floor((diff / 1000) % 60);
-
-          daysEl.textContent = padZero(days, 3);
-          hoursEl.textContent = padZero(hours);
-          minutesEl.textContent = padZero(minutes);
-          secondsEl.textContent = padZero(seconds);
-        } else {
-          daysEl.textContent = "000";
-          hoursEl.textContent = "00";
-          minutesEl.textContent = "00";
-          secondsEl.textContent = "00";
-        }
-      }
-
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-
-      // Header scroll effect
-      const header = document.getElementById('main-header');
-      let scrolled = false;
-
-      window.addEventListener('scroll', function() {
-        const isScrolled = window.scrollY > 50;
-
-        if (isScrolled && !scrolled) {
-          header.classList.add('header-scrolled');
-          scrolled = true;
-        } else if (!isScrolled && scrolled) {
-          header.classList.remove('header-scrolled');
-          scrolled = false;
-        }
+      // Loading Screen
+      window.addEventListener('load', () => {
+          setTimeout(() => {
+              document.getElementById('loading-screen').classList.add('hidden');
+          }, 3000);
       });
-
-      // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      mobileMenuBtn.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-
-        const svg = mobileMenuBtn.querySelector('svg');
-        const path = svg.querySelector('path');
-
-        if (mobileMenu.classList.contains('hidden')) {
-          path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        } else {
-          path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        }
-      });
-
-      // Close mobile menu when clicking on links
-      const mobileLinks = mobileMenu.querySelectorAll('a');
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          const svg = mobileMenuBtn.querySelector('svg');
-          const path = svg.querySelector('path');
-          path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        });
-      });
-
-      // Fade in animation observer
-      const fadeElements = document.querySelectorAll('.fade-in');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationDelay = `${i * 0.08 + Math.random() * 0.08}s`;
-            entry.target.classList.add('fade-in-activated');
-            entry.target.classList.remove('fade-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-
-      fadeElements.forEach(el => observer.observe(el));
-
-      // Gambar animasi zoom-in
-      const imgZooms = document.querySelectorAll('.img-zoom-in');
-      const imgObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            imgObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      imgZooms.forEach(img => imgObserver.observe(img));
-
-      // Section scroll animation
-      document.querySelectorAll('.section-animate').forEach(section => {
-        section.classList.remove('visible');
-      });
-
-      const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            sectionObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.18 });
-
-      document.querySelectorAll('.section-animate').forEach(section => {
-        sectionObserver.observe(section);
-      });
-
-      // Overlay video logic
-      const openOverlayBtn = document.getElementById('open-video-overlay');
-      const closeOverlayBtn = document.getElementById('close-video-overlay');
-      const videoOverlay = document.getElementById('video-overlay');
-
-      if (openOverlayBtn && closeOverlayBtn && videoOverlay) {
-        openOverlayBtn.addEventListener('click', () => {
-          videoOverlay.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-        });
-        closeOverlayBtn.addEventListener('click', () => {
-          videoOverlay.classList.add('hidden');
-          document.body.style.overflow = '';
-          // Stop video playback by resetting src
-          const iframe = videoOverlay.querySelector('iframe');
-          iframe.src = iframe.src;
-        });
-        // Optional: close overlay on ESC key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && !videoOverlay.classList.contains('hidden')) {
-            videoOverlay.classList.add('hidden');
-            document.body.style.overflow = '';
-            const iframe = videoOverlay.querySelector('iframe');
-            iframe.src = iframe.src;
-          }
-        });
-      }
     </script>
   </body>
 </html>

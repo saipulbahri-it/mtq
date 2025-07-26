@@ -1,0 +1,41 @@
+# Development files (only ignored in html branch, not in dev branch)
+# dev-guide/
+# memories/
+# .ai-instructions.md
+README.md
+Saran*
+
+# Development assets (keep only html/ folder for deployment)
+# Uncomment these lines when on html branch:
+# css/
+# js/
+# images/
+# index.html
+# favicon.ico
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp

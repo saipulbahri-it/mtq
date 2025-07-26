@@ -1,0 +1,31 @@
+{
+  "name": "mtq-aceh-xxxvii-website",
+  "version": "1.0.0",
+  "description": "Website for MTQ (Musabaqah Tilawatil Qur'an) Aceh XXXVII 2025 - Pidie Jaya",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "live-server html/ --port=8080 --open=/",
+    "preview": "live-server html/ --port=8080 --no-browser",
+    "start": "npm run dev",
+    "update-deployment": "./update-deployment.sh",
+    "deploy-setup": "./deploy-config.sh"
+  },
+  "keywords": [
+    "mtq",
+    "aceh",
+    "quran",
+    "pidie-jaya",
+    "website",
+    "static"
+  ],
+  "author": "saifcode",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/web-mtq-pijay.git"
+  },
+  "homepage": "https://mtq-pijay.pages.dev"
+}
