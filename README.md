@@ -110,9 +110,10 @@ git add .
 git commit -m "feat: your changes"
 git push origin dev
 
-# Deploy to production
+# Deploy to production (clean html branch)
 git checkout html
-cp -r html/* .
+rm -rf ./* (keeping .git and .gitignore)
+cp -r ../html/* . (copy built files from dev branch)
 git add .
 git commit -m "deploy: update website"
 git push origin html
