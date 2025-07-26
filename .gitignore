@@ -1,0 +1,15 @@
+# HTML Branch - Deployment Only
+# This branch contains only built files from src/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Editor files
+.vscode/
+.idea/
+*~
